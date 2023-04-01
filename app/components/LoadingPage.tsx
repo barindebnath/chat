@@ -1,11 +1,10 @@
+'use client'
 import React from 'react';
-import { Loader, Paper } from '@mantine/core';
+import { Loader } from '@mantine/core';
 
 const LoadingPage = () => {
   return (
-    <Paper p="lg" h='100vh'>
-      <Loader size="md" />
-    </Paper>
+    <Loader size="md" />
   )
 }
 

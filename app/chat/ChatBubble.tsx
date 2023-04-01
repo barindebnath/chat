@@ -7,7 +7,6 @@ type StyleProps = {
 
 const useStyles = createStyles((theme, props: StyleProps) => {
   const isDark = theme.colorScheme === 'dark';
-  console.log('color ', theme.colorScheme)
   const bgColor = props.isSelf ? (
     isDark ? '#591874' : '#821bad'
   ) : (
@@ -33,6 +32,13 @@ const useStyles = createStyles((theme, props: StyleProps) => {
       padding: '12px 16px',
       maxWidth: '60%',
       wordBreak: 'break-word',
+      [`@media (max-width: ${theme.breakpoints.xs})`]: {
+        fontSize: '12px',
+        lineHeight: '17px',
+      },
+      '@supports (max-width: max(60%, 220px))': {
+        maxWidth: 'max(60%, 220px)',
+      },
     },
   })
 });

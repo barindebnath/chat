@@ -24,6 +24,9 @@ const styles = {
     display: 'inline-block',
     verticalAlign: 'middle',
     width: 'calc(100% - 2.75rem - 1rem)',
+    '& textarea': {
+      borderRadius: '25px',
+    },
     [`@media (max-width: ${theme.breakpoints.xs})`]: {
       width: 'calc(100% - 2.75rem)',
     },
@@ -31,8 +34,13 @@ const styles = {
   sendIcon: {
     display: 'inline-flex',
     verticalAlign: 'middle',
+    borderRadius: '25px',
     '& > svg': {
       verticalAlign: 'middle',
+      transform: 'rotate(45deg) translate(-1px, 1px) scale(1.1)',
+    },
+    '&::active': {
+      transform: 'translateY(0) !important',
     },
   },
 };
@@ -59,7 +67,7 @@ const InputBox = () => {
         sx={styles.textArea}
       />
       <ActionIcon
-        variant="light"
+        variant="outline"
         color="violet"
         size="xl"
         ml={{ xs: 'sm', sm: 'md' }}

@@ -8,14 +8,10 @@ import {
   TextInput,
   PasswordInput,
   Button,
-  useMantineTheme,
 } from '@mantine/core';
 
-// local
-import AppLayout from '../components/AppLayout';
 
 const SignUpPage = () => {
-  const theme = useMantineTheme();
 
   const form = useForm({
     initialValues: {
@@ -42,25 +38,22 @@ const SignUpPage = () => {
   };
 
   return (
-    <AppLayout
-      header={
-        <Text
-          size="xl"
-          weight={700}
-          align="center"
-          variant="gradient"
-          gradient={{ from: 'indigo', to: 'cyan' }}
-          style={{ letterSpacing: '2px', lineHeight: 1.2 }}
-        >
-          Join Us Today
-        </Text>
-      }
-    >
+    <div style={{ padding: '60px 16px 0px' }}>
+      <Text
+        size="xl"
+        weight={700}
+        align="center"
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan' }}
+        style={{ letterSpacing: '2px', lineHeight: 1.2 }}
+      >
+        Join Us Today
+      </Text>
       <form
         style={{
           maxWidth: '400px',
           margin: 'auto',
-          paddingTop: '24px',
+          paddingTop: '48px',
         }}
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
       >
@@ -69,40 +62,40 @@ const SignUpPage = () => {
           placeholder="Enter your first name"
           {...form.getInputProps('firstName')}
           size="md"
-          style={{ marginBottom: theme.spacing.md }}
+          style={{ marginBottom: '16px' }}
         />
         <TextInput
           label="Last name"
           placeholder="Enter your last name"
           {...form.getInputProps('lastName')}
           size="md"
-          style={{ marginBottom: theme.spacing.md }}
+          style={{ marginBottom: '16px' }}
         />
         <TextInput
           label="Email"
           placeholder="Enter your email"
           {...form.getInputProps('email')}
           size="md"
-          style={{ marginBottom: theme.spacing.md }}
+          style={{ marginBottom: '16px' }}
         />
         <PasswordInput
           label="Password"
           placeholder="Enter your password"
           {...form.getInputProps('password')}
           size="md"
-          style={{ marginBottom: theme.spacing.md }}
+          style={{ marginBottom: '16px' }}
         />
         <Button
           type="submit"
           variant="gradient"
           gradient={{ from: 'indigo', to: 'cyan' }}
           size="md"
-          style={{ marginTop: theme.spacing.sm, width: '100%' }}
+          style={{ marginTop: '12px', width: '100%' }}
         >
           Create Account
         </Button>
       </form>
-    </AppLayout>
+    </div>
   )
 }
 

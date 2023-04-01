@@ -1,4 +1,5 @@
 import RootStyleRegistry from "./emotion";
+import AppLayout from "./components/AppLayout";
 
 export const metadata = {
   title: 'Chat App',
@@ -12,7 +13,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body style={{ height: '100%' }}>
         <RootStyleRegistry>
-          {children}
+          <AppLayout>
+            {children}
+          </AppLayout>
         </RootStyleRegistry>
       </body>
     </html>

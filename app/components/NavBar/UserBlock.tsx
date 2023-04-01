@@ -31,7 +31,6 @@ const UserBlock = () => {
     <Box
       sx={{
         paddingTop: theme.spacing.md,
-        borderTop: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
       }}
     >
       {user ? (
@@ -67,7 +66,7 @@ const UserBlock = () => {
 
         </UnstyledButton>
       ) : isLoginPage ? (
-        <Link href="/signup" style={{ textDecoration: 'none' }} passHref>
+        <Link href="/signup" style={{ textDecoration: 'none' }}>
           <Button
             variant='gradient'
             gradient={{ from: 'indigo', to: 'cyan' }}
@@ -84,7 +83,7 @@ const UserBlock = () => {
           </Button>
         </Link>
       ) : (
-        <Link href="/login" style={{ textDecoration: 'none' }} passHref>
+        <Link href="/login" style={{ textDecoration: 'none' }}>
           <Button
             variant='gradient'
             gradient={{ from: 'violet', to: 'purple' }}
