@@ -1,5 +1,6 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 // mantine
 import { useForm } from '@mantine/form';
@@ -8,12 +9,16 @@ import {
   TextInput,
   PasswordInput,
   Button,
+  Notification,
 } from '@mantine/core';
 
 // local
 import { signIn } from '../services/user';
+import { IconX } from '@tabler/icons-react';
 
 const LoginPage = () => {
+  const { push } = useRouter();
+  const [errorMsg, setErrorMsg] = useState('');
 
   const form = useForm({
     initialValues: {
@@ -30,9 +35,17 @@ const LoginPage = () => {
     email: string;
     password: string;
   }) => {
+    setErrorMsg("");
     const [data, error] = await signIn(values.email, values.password);
-    console.log('data >> ', data)
-    console.log('error >> ', error)
+    if (error) setErrorMsg('Bummer! Something went wrong.');
+
+    if (data) {
+      if (data.message === 'error') {
+        setErrorMsg(data.data.msg || 'Bummer! Something went wrong.');
+      } else {
+        push('/');
+      }
+    }
   };
 
   return (
@@ -74,10 +87,21 @@ const LoginPage = () => {
           variant="gradient"
           gradient={{ from: 'violet', to: 'purple' }}
           size="md"
-          style={{ marginTop: '12px', width: '100%' }}
+          style={{ marginTop: '12px', width: '100%', marginBottom: '28px' }}
         >
           Sign In
         </Button>
+
+        {errorMsg ? (
+          <Notification
+            icon={<IconX size="1.1rem" />}
+            color="red"
+            onClose={() => setErrorMsg("")}
+          >
+            {errorMsg}
+          </Notification>
+        ) : null}
+
       </form>
     </div>
   )

@@ -83,6 +83,8 @@ const AppLayout = (props: AppLayoutProps) => {
       display: 'flex',
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.white,
       height: '100%',
+      maxWidth: '1440px',
+      margin: 'auto',
     }}>
       {navigationPanel}
       {centerContent}

@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-US" style={{ height: '100%' }}>
       <head />
-      <body style={{ height: '100%' }}>
+      <body style={{ height: '100%', backgroundColor: 'black' }}>
         <RootStyleRegistry>
           <AppLayout>
             {children}

@@ -1,5 +1,6 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 // mantine
 import { useForm } from '@mantine/form';
@@ -8,10 +9,15 @@ import {
   TextInput,
   PasswordInput,
   Button,
+  Notification,
 } from '@mantine/core';
+import { signUp } from '../services/user';
+import { IconX } from '@tabler/icons-react';
 
 
 const SignUpPage = () => {
+  const { push } = useRouter();
+  const [errorMsg, setErrorMsg] = useState('');
 
   const form = useForm({
     initialValues: {
@@ -28,13 +34,23 @@ const SignUpPage = () => {
     }
   });
 
-  const handleSubmit = (values: {
+  const handleSubmit = async (values: {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
   }) => {
-    console.log('value >> ', values)
+    setErrorMsg("");
+    const [data, error] = await signUp(values.firstName, values.lastName, values.email, values.password);
+    if (error) setErrorMsg('Bummer! Something went wrong.');
+
+    if (data) {
+      if (data.message === 'error') {
+        setErrorMsg(data.data.msg || 'Bummer! Something went wrong.');
+      } else {
+        push('/');
+      }
+    }
   };
 
   return (
@@ -90,10 +106,21 @@ const SignUpPage = () => {
           variant="gradient"
           gradient={{ from: 'indigo', to: 'cyan' }}
           size="md"
-          style={{ marginTop: '12px', width: '100%' }}
+          style={{ marginTop: '12px', width: '100%', marginBottom: '28px' }}
         >
           Create Account
         </Button>
+
+        {errorMsg ? (
+          <Notification
+            icon={<IconX size="1.1rem" />}
+            color="red"
+            onClose={() => setErrorMsg("")}
+          >
+            {errorMsg}
+          </Notification>
+        ) : null}
+
       </form>
     </div>
   )
