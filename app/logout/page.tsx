@@ -25,6 +25,7 @@ const LogoutPage = () => {
 
   useEffect(() => {
     removeSession();
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
 
   return errorMsg ? (

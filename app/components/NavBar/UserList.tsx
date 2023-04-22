@@ -53,7 +53,7 @@ const UserListItems = memo((props: UserListItemProps) => {
     </div>
   )
 });
-
+UserListItems.displayName = 'UserListItems';
 
 const tempUsersData = [{
   id: 1,

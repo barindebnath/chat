@@ -49,7 +49,7 @@ const useWebSocket = () => {
     return () => {
       client.close();
     };
-  }, [config.apiWsUrl]);
+  }, []);
 
   const send = (message: string) => {
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {

@@ -1,10 +1,13 @@
 'use client'
 import { useCallback } from 'react';
 
+// mantine
+import { Loader } from '@mantine/core';
+
 // local
 import ChatBubble from "./ChatBubble";
 import InputBox from "./InputBox";
-import RightContent from "./RightContent";
+// import RightContent from "./RightContent";
 import useWebSocket from '../services/useWebSocket';
 
 const ChatPage = () => {
@@ -25,7 +28,10 @@ const ChatPage = () => {
   //   </div>
   // );
 
-  const handleSend = useCallback((message: string) => send(message), []);
+  const handleSend = useCallback((message: string) => {
+    send(message);
+    // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return socket ? (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -50,7 +56,7 @@ const ChatPage = () => {
       </div>
       <InputBox handleSend={handleSend} />
     </div>
-  ) : 'Loading...';
+  ) : <Loader size="md" />;
 }
 
 export default ChatPage;
