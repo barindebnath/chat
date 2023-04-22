@@ -45,13 +45,14 @@ const styles = {
   },
 };
 
-const InputBox = () => {
+const InputBox = (props: { handleSend: (msg: string) => void }) => {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const handleSend = () => {
+  const handleClick = () => {
     const message = inputRef.current && inputRef.current.value.trim();
     if (message) {
       console.log("message >> ", message)
+      props.handleSend(message);
     }
   };
 
@@ -74,7 +75,7 @@ const InputBox = () => {
         radius="md"
         title='Send'
         sx={styles.sendIcon}
-        onClick={() => handleSend()}
+        onClick={() => handleClick()}
       >
         <IconSend size="1rem" />
       </ActionIcon>

@@ -1,11 +1,14 @@
-
+'use client'
+import { useCallback } from 'react';
 
 // local
 import ChatBubble from "./ChatBubble";
 import InputBox from "./InputBox";
 import RightContent from "./RightContent";
+import useWebSocket from '../services/useWebSocket';
 
 const ChatPage = () => {
+  const { socket, messages, send } = useWebSocket();
 
   // const rightPanel = props.right && (
   //   <div
@@ -22,9 +25,11 @@ const ChatPage = () => {
   //   </div>
   // );
 
+  const handleSend = useCallback((message: string) => send(message), []);
 
-  return (
+  return socket ? (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+
       <div
         style={{
           padding: '24px',
@@ -36,10 +41,16 @@ const ChatPage = () => {
         <ChatBubble message="Sure, what do you need help with?" />
         <ChatBubble message="I can't log in." isSelf />
         <ChatBubble message="Okay, let me see what I can do." />
+        {messages.length ? messages.map((message, index) => (
+          <ChatBubble
+            key={message + index}
+            message={message}
+          />
+        )) : null}
       </div>
-      <InputBox />
+      <InputBox handleSend={handleSend} />
     </div>
-  );
+  ) : 'Loading...';
 }
 
 export default ChatPage;
